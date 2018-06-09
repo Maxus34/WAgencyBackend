@@ -17,6 +17,8 @@ class m180525_100202_add_product_table extends Migration
             'name' => $this->string(255),
             'price' => $this->float(),
             'type' => $this->integer()->defaultValue(ProductRecord::$TYPE_BUDGETARY),
+            'available' => $this->boolean()->defaultValue(''),
+
 
             'createdAt'   => $this->dateTime()->defaultExpression('NOW()'),
             'updatedAt'   => $this->dateTime()->defaultExpression('NOW()'),

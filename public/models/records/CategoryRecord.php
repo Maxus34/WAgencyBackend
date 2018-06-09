@@ -19,11 +19,30 @@ class CategoryRecord extends ActiveRecord
     }
 
 
+    public function extraFields()
+    {
+        return [
+            'childs',
+            'products',
+        ];
+    }
+
+
     public function rules () {
         return [
             [['name'], 'required'],
             ['name', 'string', 'max' => 100]
         ];
+    }
+
+
+    public function fields()
+    {
+        $fields = parent::fields();
+
+        $fields['img'] = function () { return $_SERVER['HTTP_HOST'] . $this->getMainImage()->getUrl(); };
+
+        return $fields;
     }
 
 
@@ -59,6 +78,7 @@ class CategoryRecord extends ActiveRecord
     public function getChilds () {
         return $this->hasMany(ChildCategoryRecord::class, ['catId' => 'id']);
     }
+
 
     public function getProducts () {
         return $this->hasMany(ProductRecord::class, ['catId', 'id'])

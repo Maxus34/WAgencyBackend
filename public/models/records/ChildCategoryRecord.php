@@ -36,6 +36,13 @@ class ChildCategoryRecord extends ActiveRecord
     }
 
 
+    public function extraFields () {
+        return [
+            'products',
+        ];
+    }
+
+
     public function behaviors()
     {
         return [

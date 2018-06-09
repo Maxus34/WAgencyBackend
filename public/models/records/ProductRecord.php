@@ -13,11 +13,26 @@ use yii\db\ActiveRecord;
 use yii\behaviors\TimestampBehavior;
 use app\behaviors\ImageBehavior;
 
+
+/**
+ * Class ProductRecord
+ * @package app\models\records
+ *
+ * @property $id        integer
+ * @property $catId     integer
+ * @property $name      string
+ * @property $price     float
+ * @property $type      integer
+ * @property $available integer
+ */
 class ProductRecord extends ActiveRecord
 {
     public static $TYPE_PREMIUM   = 1;
     public static $TYPE_COMMON    = 2;
     public static $TYPE_BUDGETARY = 3;
+
+    public static $AVAILABLE   = 1;
+    public static $UNAVAILABLE = 0;
 
 
     public static function tableName()
@@ -28,9 +43,20 @@ class ProductRecord extends ActiveRecord
 
     public function rules () {
         return [
-            [['catId', 'name', 'price', 'type'], 'required'],
+            [['catId', 'name', 'price', 'type', 'available'], 'required'],
             ['name', 'string', 'max' => 100],
+            ['available', 'in', 'range' => [1, 0]]
         ];
+    }
+
+
+    public function fields()
+    {
+        $fields = parent::fields();
+
+        $fields['img'] = function () { return $_SERVER['HTTP_HOST'] . $this->getMainImage()->getUrl(); };
+
+        return $fields;
     }
 
 

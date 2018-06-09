@@ -18,6 +18,9 @@ $config = [
     'modules' => [
         'admin' => [
             'class' => app\modules\admin\Module::class
+        ],
+        'api' => [
+            'class' => app\modules\api\Module::class
         ]
     ],
 ];
