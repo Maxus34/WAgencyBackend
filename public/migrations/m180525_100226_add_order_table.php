@@ -16,6 +16,8 @@ class m180525_100226_add_order_table extends Migration
             'status' => $this->boolean(),
 
             'name'  => $this->string(255),
+            'surname' => $this->string(100),
+            'patronymic' => $this->string(100),
             'email' => $this->string(255),
             'phone' => $this->string(100),
 

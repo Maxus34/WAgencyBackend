@@ -11,6 +11,7 @@ use yii\behaviors\TimestampBehavior;
  *
  * @property $id       integer
  * @property $orderId  integer
+ * @property $productId integer
  * @property $qtyItems integer
  * @property $sumItems float
  */
@@ -49,5 +50,10 @@ class OrderItemRecord extends ActiveRecord
             [['orderId', 'qtyItems', 'sumItems'], 'required'],
             [['orderId', 'qtyItems', 'sumItems'], 'number'],
         ];
+    }
+
+
+    public function getProduct () {
+        return $this->hasOne(ProductRecord::class, ['id' => 'productId']);
     }
 }

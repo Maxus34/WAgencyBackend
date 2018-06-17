@@ -15,8 +15,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1>Просмотр заказа №<?= $model->id ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+        <?= Html::a('Изменить', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Are you sure you want to delete this item?',
@@ -29,21 +29,24 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'created_at',
-            'updated_at',
+            'createdAt',
+            'updatedAt',
             'qty',
             'sum',
             [
                 'attribute' => 'status',
-                'value' => !$model->status ? '<span class="text-danger">Активен</span>' : '<span class="text-success">Завершен</span>',
+                'value' => !$model->status ? '<span class="text-warning">Активен</span>' : '<span class="text-success">Завершен</span>',
                 'format' => 'html',
             ],
             'name',
+            'surname',
+            'patronymic',
             'email:email',
             'phone',
         ],
     ]) ?>
-
+    <hr>
+    <h4>Товары:</h4>
     <?php $items = $model->items;?>
     <div class="table-responsive">
         <table class="table table-hover table-striped">
@@ -58,14 +61,13 @@ $this->params['breadcrumbs'][] = $this->title;
             <tbody>
             <?php foreach($items as $item):?>
                 <tr>
-                    <td><a href="<?= \yii\helpers\Url::to(['/product/view', 'id' => $item->product_id])?>"><?= $item['name']?></a></td>
-                    <td><?= $item['qty_item']?></td>
-                    <td><?= $item['price']?></td>
-                    <td><?= $item['sum_item']?></td>
+                    <td><a href="<?= \yii\helpers\Url::to(['/product/view', 'id' => $item->productId])?>"><?= $item->product['name']?></a></td>
+                    <td><?= $item['qtyItems']?></td>
+                    <td><?= $item->product['price']?></td>
+                    <td><?= $item['sumItems']?></td>
                 </tr>
             <?php endforeach?>
             </tbody>
         </table>
     </div>
-
 </div>

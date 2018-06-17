@@ -33,8 +33,9 @@ $this->params['breadcrumbs'][] = $this->title;
         'sum',
         [
             'attribute' => 'status',
+            'format' => 'html',
             'value' => function ($data) {
-                return $data->status;
+                return !$data->status ? '<span class="text-warning">Активен</span>' : '<span class="text-success">Завершен</span>';
             }
         ],
         'name',

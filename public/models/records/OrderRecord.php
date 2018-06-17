@@ -8,12 +8,13 @@ use yii\behaviors\TimestampBehavior;
 /**
  * Class OrderRecord
  * @package app\models\records
- *
  * @property $id     integer
  * @property $qty    integer
  * @property $sum    float
  * @property $status boolean
  * @property $name   string
+ * @property $surname string
+ * @property $patronymic string
  * @property $email  string
  * @property $phone  string
  * @property $items  OrderItemRecord|array
@@ -43,10 +44,12 @@ class OrderRecord extends ActiveRecord
     public function attributeLabels () {
         return [
             'id' => '№',
-            'qty' => 'Кол-во',
+            'qty' => 'Кол-во товаров',
             'sum' => 'Сумма',
             'status' => 'Статус',
             'name' => 'Имя',
+            'surname' => 'Фамилия',
+            'patronymic' => 'Отчество',
             'email' => 'Email',
             'phone' => 'Телефон',
             'createdAt' => 'Дата'
@@ -56,7 +59,7 @@ class OrderRecord extends ActiveRecord
 
     public function rules () {
         return [
-            [['qty', 'sum', 'name', 'email', 'phone'], 'required'],
+            [['qty', 'sum', 'name', 'surname', 'patronymic', 'email', 'phone'], 'required'],
             [['qty', 'sum'], 'number'],
             [['status'], 'boolean'],
             [['name', 'email', 'phone'], 'string', 'max'=>100]

@@ -7,6 +7,7 @@ use app\models\User;
 class Module extends \yii\base\Module
 {
     public $controllerNamespace = 'app\modules\admin\controllers';
+    public $defaultRoute = 'order';
 
     public function init()
     {
