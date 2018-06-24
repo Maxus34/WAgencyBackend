@@ -55,6 +55,7 @@ class CartController extends Controller
         $order -> sum = $orderData['sum'];
 
         if($order -> save()){
+            $orderItems = [];
             foreach($orderData['items'] as $item) {
                 $orderItem = new OrderItemRecord();
                 $orderItem -> orderId   = $order->id;
@@ -62,10 +63,27 @@ class CartController extends Controller
                 $orderItem -> qtyItems  = 1;
                 $orderItem -> sumItems  = $item['price'];
                 $orderItem -> save();
+
+                $orderItems[] = $orderItem;
             }
+
+            $this->sendEmail($order, $orderItems);
         } else {
             throw new HttpException(422, json_encode($order->errors));
         }
+    }
+
+
+    public function sendEmail (OrderRecord $order, array $items) {
+        $message = \Yii::$app->mailer->compose('order', [
+            'order' => $order,
+            'items' => $items,
+        ]);
+
+        $message
+            ->setFrom('wagency.bot@mail.ru')
+            ->setTo($order->email)
+            ->send();
     }
 
 

@@ -21,10 +21,6 @@ class SiteController extends Controller
             'error' => [
                 'class' => 'yii\web\ErrorAction',
             ],
-            'captcha' => [
-                'class' => 'yii\captcha\CaptchaAction',
-                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
-            ],
         ];
     }
 
@@ -47,10 +43,5 @@ class SiteController extends Controller
     public function actionLogout () {
         Yii::$app->user->logout();
         return $this->redirect('login');
-    }
-
-
-    public function actionIndex () {
-        return $this->render('index');
     }
 }

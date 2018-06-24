@@ -30,7 +30,7 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'Свабдебный калькулятор',
+        'brandLabel' => 'Свадебный калькулятор',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
@@ -39,7 +39,7 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'Главная', 'url' => ['/site/index']],
+            ['label' => 'Главная', 'url' => ['/admin']],
             Yii::$app->user->isGuest ? (
                 ['label' => 'Войти', 'url' => ['/site/login']]
             ) : (
@@ -72,7 +72,7 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left"> &copy; MXS34 Corp <?= date('Y') ?></p>
+        <p class="pull-left"> &copy; Дипломная работа Загороднюк И.В. <?= date('Y') ?></p>
     </div>
 </footer>
 

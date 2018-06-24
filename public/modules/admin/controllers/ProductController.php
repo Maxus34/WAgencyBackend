@@ -84,6 +84,19 @@ class ProductController extends Controller
     }
 
 
+    public function actionDelete ($id) {
+        $model = $this->getModel($id);
+
+        if (!empty($model)) {
+            $model -> delete();
+            Yii::$app->session->setFlash('success', "Товар #{$id} успешно удален");
+            return $this->redirect('index');
+        } else {
+            Yii::$app->session->setFlash('error', 'Ошибка удаления товара');
+            return $this->redirect('index');
+        }
+    }
+
     /**
      * @param $id
      * @return ProductRecord|null

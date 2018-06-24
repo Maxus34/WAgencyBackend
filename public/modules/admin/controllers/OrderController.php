@@ -59,7 +59,7 @@ class OrderController extends Controller
 
         Yii::$app->session->setFlash('success', 'Заказ успешно удален.');
 
-        return $this->render('index');
+        return $this->redirect('index');
     }
 
 
